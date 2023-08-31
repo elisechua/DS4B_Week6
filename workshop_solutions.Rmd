@@ -20,10 +20,25 @@ output:
 ```{r}
 library(tidyverse)
 crab <- read_csv("raw_data/data.csv")
+crab
 ```
 
 ## An interesting plot
+
+### Allometry
 ```{r}
+library(ggplot2)
+ggplot(data = crab, aes(x=(VO2_ml_per_h/weight), y=TempC, colour=Sex)) +
+  geom_point() +
 
 ```
-
+```{r}
+ggplot(data = crab, aes(x=weight, y=VO2_ml_per_h, colour=Sex)) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  labs(
+    title="Relationship between metabolic rate and weight, by sex",
+    x="weight(g)",
+    y="ml oxygen consumed / hour")
+```
+At weights higher than around 0.1g, females have higher energy expenditure than males. Due to heavier investment in reproduction? Or hormones?
